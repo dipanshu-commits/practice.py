@@ -245,4 +245,53 @@ def main():
 main()
 '''
 
+# This program simulates a simple banking system where the user can check their PIN, balance, and perform withdrawal or deposit operations.
 
+
+def check_pin(entered_pin, actual_pin):
+    if entered_pin == actual_pin:
+        return "Access granted"
+    else:
+        return "Access denied"
+    
+def check_balance(balance,amount):
+    if amount <= balance:
+        return True
+    else:
+        return False
+    
+
+def withdraw(balance, amount):
+    if check_balance(balance, amount):
+        return balance - amount
+    else:
+        return balance
+
+def deposit(balance, amount):
+    return balance + amount
+
+def main():
+    actual_pin = "1234"
+    balance = 10000.0
+    entered_pin = input("Enter your PIN: ")
+    result = check_pin(entered_pin, actual_pin)
+    print(result)
+    if result == "Access granted":
+        action = input("Do you want to withdraw or deposit? (withdraw/deposit/check): ").lower().strip()
+        if action == "withdraw":
+            amount = float(input("Enter the amount: "))
+            balance = withdraw(balance, amount)
+            print(f"Your new balance after withdrawal is: {balance}")
+        elif action == "deposit":
+            amount = float(input("Enter the amount: "))
+            balance = deposit(balance, amount)
+            print(f"Your new balance after deposit is: {balance}")
+        elif action == "check":
+            print(f"Your current balance is: {balance}")
+        else:
+            print("Invalid action. Please choose either 'withdraw' or 'deposit'.")
+    else:
+        print("Please try again with the correct PIN.")
+        return
+
+main()
