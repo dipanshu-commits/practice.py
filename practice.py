@@ -248,7 +248,7 @@ main()
 # This program simulates a simple banking system where the user can check their PIN, balance, and perform withdrawal or deposit operations.
 
 
-def check_pin(entered_pin, actual_pin):
+'''def check_pin(entered_pin, actual_pin):
     if entered_pin == actual_pin:
         return "Access granted"
     else:
@@ -295,3 +295,8 @@ def main():
         return
 
 main()
+'''
+
+
+
+
