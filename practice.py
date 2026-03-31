@@ -1,5 +1,5 @@
 
-# practice of fundamentals in python
+# practice of fundamentals in python, and questions solved which are related to functions, loops, conditionals, and basic input/output operations. The code snippets include various examples of how to define and use functions, perform calculations, and interact with the user through input and output. Each snippet demonstrates a specific concept or task, such as calculating the total bill with discounts, converting currency, or simulating a simple banking system.
 
 
 
@@ -298,5 +298,214 @@ main()
 '''
 
 
+#loan eligibility system 
 
+'''def main():
+    credit_score = int(input("Enter your credit score: "))
+    employment_type = input("Enter your employment type (salaried/self-employed/unemployed): ").lower().strip()
+    monthly_income = float(input("Enter your monthly income: "))
+    requested_loan_number = float(input("Enter the requested loan amount: "))
+    credit_score_rating_result = credit_score_rating(credit_score)
+    employment_checker_result = employment_checker(employment_type, monthly_income)
+    loan_limit_result = loan_limit(credit_score_rating_result, monthly_income)
+
+
+
+    if credit_score_rating_result == "Poor":
+            print("Sorry, you are not eligible for a loan due to your poor credit score.")
+    elif   employment_checker_result == False:
+            print("REJECTED — Employment criteria not met")
+    elif requested_loan_number >= loan_limit_result:
+            print("REJECTED — Requested amount exceeds limit")
+    else:
+        print(f"Credit Rating: {credit_score_rating}")
+        print(f"Employment Status: APPROVED")
+        print(f"Maximum Loan Limit: {loan_limit_result}")
+        print(f"Requested Loan Amount: {requested_loan_number}")
+        print("Verdict: APPROVED")
+            
+
+    
+
+
+
+
+def credit_score_rating(score):
+    if score >= 740:
+        return "Excellent"
+    elif 670 <= score < 740:
+        return "Good"
+    elif 580 <= score < 670:
+        return "Fair"
+    else:
+        return "Poor"
+
+def employment_checker(employment_type,monthly_income):
+    if employment_type == "salaried" and monthly_income >= 30000:
+        return True
+    elif employment_type == "self-employed" and monthly_income >= 50000:
+        return True
+    else:
+        return False
+
+def loan_limit(credit_score_rating, monthly_income):
+    if credit_score_rating == "Excellent":
+        return monthly_income * 60
+    elif credit_score_rating == "Good":
+        return monthly_income * 40
+    elif credit_score_rating == "Fair":
+        return monthly_income * 20
+    else:
+        return 0.0
+    
+
+def verdict(credit_score_rating, employment_checker_result, requested_loan_number, loan_limit_result):
+    if credit_score_rating == "Poor":
+        return "REJECTED — Poor credit score"
+    elif employment_checker_result == False:
+        return "REJECTED — Employment criteria not met"
+    elif requested_loan_number >= loan_limit_result:
+        return "REJECTED — Requested amount exceeds limit"
+    else:
+        return "APPROVED"
+    
+
+main()
+
+'''
+
+#DEEP THOUGHTS   --CS50P LEC2 QS 1
+
+'''def main():
+    qs = input("What is the answer to the Ultimate Question of Life, The Universe, and Everything? ").lower().strip()
+    if qs == "42" or qs == "forty-two" or qs == "forty two":
+        print("Yes")
+    else:
+        print("No")
+
+main()
+
+'''
+
+'''qs = input("What is the answer to the Ultimate Question of Life, The Universe, and Everything? ").lower().strip()
+
+match qs:
+    case "42" | "forty-two" | "forty two":
+        print("Yes")
+    case _:
+        print("No")
+    case _:
+        print("u aint tuff")
+
+'''
+
+
+#fedral bank saving ---CS50P LEC2 QS 2
+
+
+'''def main():
+    greeting = input("Greeting: ").lower().strip()
+    if greeting.startswith("hello"):
+        print("$0")
+    elif greeting.startswith("h"):
+        print("$20")
+    else:
+        print("$100")
+
+main()
+
+'''
+
+
+'''#file extension checker ---CS50P LEC2 QS 3
+
+
+def main():
+    filename = input("File name: ").lower().strip()
+    if filename.endswith(".gif"):
+        print("image/gif")
+    elif filename.endswith(".jpg") or filename.endswith(".jpeg"):
+        print("image/jpeg")
+    elif filename.endswith(".png"):
+        print("image/png")
+    elif filename.endswith(".pdf"):
+        print("application/pdf")
+    elif filename.endswith(".txt"):
+        print("text/plain")
+    else:
+        print("application/octet-stream")
+
+main()
+
+def main():
+    filename = input("File name: ").lower().strip()
+    match filename:
+        case _ if filename.endswith(".gif"):
+            print("image/gif")
+        case _ if filename.endswith(".jpg") or filename.endswith(".jpeg"):
+            print("image/jpeg")
+        case _ if filename.endswith(".png"):
+            print("image/png")
+        case _ if filename.endswith(".pdf"):
+            print("application/pdf")
+        case _ if filename.endswith(".txt"):
+            print("text/plain")
+        case _:
+            print("application/octet-stream")
+
+
+ main()'''
+
+
+#math interpreter ---CS50P LEC2 QS 4
+
+''''
+def main():
+    x_y_z = input("Expression: ").strip()
+    evaluation = evaluator(x_y_z)
+    print(f"{evaluation:.1f}")
+
+
+
+
+
+
+def evaluator(x_y_z):
+    x, y, z = x_y_z.split()
+    if y == "+" and x.isdigit() and z.isdigit():
+        return float(x) + float(z)
+    elif y == "-" and x.isdigit() and z.isdigit():
+        return float(x) - float(z)
+    elif y == "*" and x.isdigit() and z.isdigit():
+        return float(x) * float(z)
+    elif y == "/" and x.isdigit() and z.isdigit():
+        return float(x) / float(z)
+    else:
+        return ("Invalid operator. Please use +, -, *, or /.")
+
+    
+main()'''
+
+#meal time ---CS50P LEC2 QS 5
+'''
+def convert(time):
+    hours, minutes = time.split(":")
+    hours = int(hours)
+    minutes = int(minutes)
+    return hours + minutes / 60
+
+def main():
+    time = input("What time is it? ")
+    converted_time = convert(time)
+    if 7.00 <= converted_time <= 8.00:
+        print("breakfast time")
+    elif 12.00 <= converted_time <= 13.00:
+        print("lunch time")
+    elif 18.00 <= converted_time <= 19.00:
+        print("dinner time")
+    else:
+        print("It's not meal time.")
+
+
+main()'''
 
