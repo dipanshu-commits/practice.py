@@ -509,3 +509,44 @@ def main():
 
 main()'''
 
+
+
+#nutritionix
+
+def main():
+    user_input = input("Enter a food item: ").lower().strip()
+    food = get_sugar(user_input)
+
+    
+
+    if food == None:
+        print(f"Food: {user_input}")
+        print("Not on menu")
+    else:
+        daily_intake = daily_percentage(food) 
+        print(f"Food: {user_input}")
+        print(f"Sugar: {food}g")
+        print(f"Daily intake: {daily_intake:.1f}%")
+        
+def get_sugar(user_input):
+    match user_input:
+        case "granola bar":
+            return 16
+        case "yogurt":
+            return 12
+        case "apple juice":
+            return 28
+        case "chocolate milk":
+            return 25
+        case "orange":
+            return 9
+        case _:
+            return None
+        
+
+def daily_percentage(suger):
+    daily_value = 50
+    percentage = (suger / daily_value) * 100
+    return percentage
+
+main()
