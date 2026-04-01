@@ -512,7 +512,7 @@ main()'''
 
 
 #nutritionix
-
+'''
 def main():
     user_input = input("Enter a food item: ").lower().strip()
     food = get_sugar(user_input)
@@ -549,4 +549,67 @@ def daily_percentage(suger):
     percentage = (suger / daily_value) * 100
     return percentage
 
+main()'''
+
+
+
+'''#The "Pro-Kebab" Case Converter
+
+
+def main():
+    user_input = input("Enter a string: ").lower()
+    converted_string = convert(user_input)
+    if converted_string == None:
+        print("Nothing to Convert")
+    elif converted_string == "invalid":
+        print("Invalid input. String cannot start with a digit.")
+    else:
+        print(f"Converted string: {converted_string}")
+
+
+def convert(s):
+    s = s.strip().lower()
+
+    if s == "":
+        return None
+    elif s[0].isdigit():
+        return "invalid"
+    
+    s = s.replace("python", "snake")
+    
+    words = s.split()
+    return "-".join(words)
+
+    
+
+
+main()'''
+
+
+#The "Strict Tag Sanitizer"
+
+
+'''def sanitize(s):
+    if "python" in s:
+        return None
+    i = 0
+    while i < len(s) and s[i].isdigit():
+        i += 1
+    if i > 0:
+        s = "tag" + s[i:]
+
+
+    words = s.split()
+    return "#" + "-".join(words)
+
+
+def main():
+    user_input = input("Enter a string: ").lower().strip()
+    sanitized_string = sanitize(user_input)
+    if sanitized_string == None:
+        print("Forbidden Content")
+    else:
+        print(f"Sanitized string: {sanitized_string}")
+
 main()
+'''
