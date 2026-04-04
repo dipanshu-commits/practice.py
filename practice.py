@@ -613,3 +613,101 @@ def main():
 
 main()
 '''
+
+
+
+#inventory shop manager
+
+inventory = {}
+
+
+def main():
+    while True:
+        print('''Inventory Shop Manager
+              1. Add Item
+              2. Restock existing items
+              3. View Inventory
+              4. Sell item
+              5. Check low stock
+              6.Total inventory Value
+              7. Exit''')
+        choice = int(input("Enter your choice (1-7): "))
+        if choice == 1:
+            qs1 = input("What do you want to add to the inventory? ")
+            qs2 = int(input("How many items do you want to add? "))
+            qs3 = float(input("What is the price of the item? "))
+            add_item(qs1, qs2, qs3)
+        elif choice == 2:
+            qs4 = input("Which item do you want to restock? ")
+            qs5 = int(input("How many items do you want to add? "))
+            if qs4 in inventory:
+                restock_item(qs4, qs5)
+            else:
+                print(f"{qs4} is not in the inventory. Please add it first before restocking.")
+        elif choice == 3:
+            view_inventory()
+        elif choice == 4:
+            qs6 = input("Which item do you want to sell? ")
+            qs7 = int(input("How many items do you want to sell? "))
+            sell_item(qs6, qs7)
+        elif choice == 5:
+            check_low_stock()
+        elif choice == 6:
+            total_inventory_value()
+        elif choice == 7:
+            print("Exiting Inventory Shop Manager. Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please enter a number between 1 and 7.")
+
+def add_item(qs1, qs2, qs3):
+    inventory[qs1] = {"quantity": qs2, "price": qs3}
+    print(f"Added {qs2} {qs1}(s) to inventory at ${qs3} each.")
+    
+
+def restock_item(qs4, qs5):
+    inventory[qs4]["quantity"] += qs5
+    print(f"Restocked {qs5} {qs4}(s). New quantity: {inventory[qs4]['quantity']}")
+
+
+def view_inventory():
+    if not inventory:
+        print("Inventory is empty.Choose different options")
+        return
+    for item, details in inventory.items():
+        print(f"{item}: Quantity: {details['quantity']}, Price: ${details['price']}")
+
+def sell_item(qs6, qs7):
+    if qs6 in inventory and inventory[qs6]["quantity"] >= qs7:
+        inventory[qs6]["quantity"] -= qs7
+        if inventory[qs6]["quantity"] == 0:
+            del inventory[qs6]
+            print(f"Sold {qs7} {qs6}(s). {qs6} is now out of stock and removed from inventory.")
+        else:
+            print(f"Sold {qs7} {qs6}(s). New quantity: {inventory[qs6]['quantity']}")
+    else:
+        print(f"Not enough {qs6} in stock to sell. OR {qs6} is not in inventory.")
+
+
+def low_stock_threshold():
+    return 2
+
+
+def check_low_stock():
+    for item, details in inventory.items():
+        if details['quantity'] < low_stock_threshold():
+            print(f'''Low Stock Items: ''')
+            print(f"{item}: Quantity: {details['quantity']}, Price: ${details['price']}")
+        else:
+            print("No low stock items at the moment.")
+
+
+def total_inventory_value():
+    if not inventory:
+        print("Inventory is empty. Total value is $0.")
+    else:
+        total_value = sum(details['quantity'] * details['price'] for details in inventory.values())
+        print(f"Total inventory value: ${total_value:.2f}")
+
+
+main()
