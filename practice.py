@@ -633,7 +633,7 @@ def main():
               7. Exit''')
         choice = int(input("Enter your choice (1-7): "))
         if choice == 1:
-            qs1 = input("What do you want to add to the inventory? ")
+            qs1 = input("What do you want to add to the inventory? ").lower().strip()
             qs2 = int(input("How many items do you want to add? "))
             qs3 = float(input("What is the price of the item? "))
             add_item(qs1, qs2, qs3)
@@ -690,17 +690,17 @@ def sell_item(qs6, qs7):
 
 
 def low_stock_threshold():
-    return 2
+    return 5
 
 
 def check_low_stock():
-    for item, details in inventory.items():
-        if details['quantity'] < low_stock_threshold():
-            print(f'''Low Stock Items: ''')
+    low = [(item,details) for item, details in inventory.items() if details["quantity"] <= low_stock_threshold()]
+    if not low:
+        print("No items are low in stock.")
+    else:
+        print("Low stock items:")
+        for item, details in low:
             print(f"{item}: Quantity: {details['quantity']}, Price: ${details['price']}")
-        else:
-            print("No low stock items at the moment.")
-
 
 def total_inventory_value():
     if not inventory:
