@@ -617,7 +617,7 @@ main()
 
 
 #inventory shop manager
-
+"""
 inventory = {}
 
 
@@ -709,5 +709,122 @@ def total_inventory_value():
         total_value = sum(details['quantity'] * details['price'] for details in inventory.values())
         print(f"Total inventory value: ${total_value:.2f}")
 
+
+main()
+
+"""
+
+#student managment system
+
+
+students = {}
+
+
+
+
+def main():
+    print('''!------------------------------------:)
+          OPERATING MENU
+    1. Add student
+    2. Update a subject mark
+    3. View all students
+    4. View single student report
+    5. Class topper
+    6. Students who failed (any subject below 40)
+    7. Exit
+:)------------------------------------!''')
+    
+    while True:
+        choice = input('Enter your choice: ')
+        
+        if choice == '1':
+            name = input('Enter student name: ').lower().strip()
+            math_mark = float(input('Enter Math mark: '))
+            science_mark = float(input('Enter Science mark: '))
+            english_mark = float(input('Enter English mark: '))
+            add_student(name, math_mark, science_mark, english_mark)
+        elif choice == '2':
+            name = input('Enter student name to update: ').lower().strip()
+            subject = input('Enter subject to update (Math/Science/English): ')
+            new_mark = float(input('Enter new mark: '))
+            update_mark(name, subject, new_mark)
+        elif choice == '3':
+            view_all_students()
+        elif choice == '4':
+            name = input('Enter student name to view report: ').lower().strip()
+            view_single_student_report(name)
+        elif choice == '5':
+            class_topper()
+        elif choice == '6':
+            students_who_failed()
+        elif choice == '7':
+            print('Exiting the program. Goodbye!')
+            break
+        else:
+            print('Invalid choice. Please try again.')
+
+def add_student(name, math_mark, science_mark, english_mark):
+    students[name] = {
+        'Math': math_mark,
+        'Science': science_mark,
+        'English': english_mark
+    }
+    print(f'Student: {name.capitalize()} and their details have been added successfully!')
+
+def update_mark(name, subject, new_mark):
+    if name in students:
+        if subject in students[name]:
+            students[name][subject] = new_mark
+            print(f'{subject} mark for {name} has been updated to {new_mark}.')
+        else:
+            print(f'Subject {subject} not found for {name}.')
+    else:
+        print(f'Student {name} not found.')
+
+def view_all_students():
+    if not students:
+        print('No students in the system.')
+    else:
+        for name, marks in students.items():
+            print(f'''DETAILS OF {name.upper()}:
+Math: {marks['Math']}
+Science: {marks['Science']}
+English: {marks['English']}''')
+
+def view_single_student_report(name):
+    if name in students:
+        marks = students[name]
+        print(f'''REPORT FOR {name.upper()}:
+Math: {marks['Math']}
+Science: {marks['Science']}
+English: {marks['English']}''')
+        
+    else:
+        print(f'Student {name} not found.')
+
+def class_topper():
+    if not students:
+        print('No students in the system.')
+    else:
+        topper = max(students, key=lambda name: sum(students[name].values()))
+        topper_marks = students[topper]
+        print(f'''CLASS TOPPER: {topper.upper()}
+Math: {topper_marks['Math']}
+Science: {topper_marks['Science']}
+English: {topper_marks['English']}''')
+
+
+def students_who_failed():
+    failed_students = {name: marks for name,marks in students.items() if any(mark < 40 for mark in marks.values())}
+    
+    if not failed_students:
+        print('No students have failed.')
+    else:
+        print('STUDENTS WHO FAILED:')
+        for name, marks in failed_students.items():
+            print(f'''{name.upper()}:
+Math: {marks['Math']}
+Science: {marks['Science']} 
+English: {marks['English']}''')
 
 main()
